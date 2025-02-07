@@ -4,7 +4,7 @@ import { AuthContext } from '../Provider/AuthProvider';
 
 
 const Login = () => {
-const {user,signInUser}=useContext(AuthContext)
+const {user,signInUser,signInGoogle}=useContext(AuthContext)
 const navigate=useNavigate()
 console.log("object",user);
     const handleSubmit=e=>{
@@ -23,6 +23,16 @@ console.log("object",user);
             console.log(err.message);
         })
     }
+const handlesignInGoogle=()=>{
+  signInGoogle()
+  .then(result=>{
+    console.log(result.user)
+  })
+  .catch(err=>{
+    console.log("err is",err.message);
+  })
+}
+
     return (
         <div>
             <div className="hero bg-base-200 min-h-screen">
@@ -57,9 +67,11 @@ console.log("object",user);
         <div className="form-control mt-6">
           <button className="btn btn-primary">Login</button>
         </div>
+       
       </form>
       <p>New To Website?Visite:<Link to="/register" className='text-red-500 text-xl'> Register</Link></p>
     </div>
+    <p><button onClick={handlesignInGoogle} className='btn btn-ghost '>GOOGLE</button></p>
   </div>
 </div>
         </div>
